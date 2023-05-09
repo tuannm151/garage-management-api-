@@ -63,9 +63,9 @@ public class User {
     }
 
 
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Customer> customers = new LinkedHashSet<>();
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
 
     @Override

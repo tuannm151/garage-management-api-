@@ -18,9 +18,6 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Customer name is missing")
-    public String name;
-
     @Size(min = 6, message = "Phone number not valid")
     @Column(unique = true, length = 15)
     public String phone;
@@ -29,13 +26,10 @@ public class Customer {
     @Column(length = 1000)
     public String address;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(mappedBy = "customer")
     private User user;
 
-    public Customer(String name, String phone, String address) {
-        this.name = name;
+    public Customer(String phone, String address) {
         this.phone = phone;
         this.address = address;
     }
